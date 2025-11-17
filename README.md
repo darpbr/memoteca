@@ -1,59 +1,66 @@
 # Memoteca
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.10.
+Um aplicativo simples criado com Angular que demonstra CRUD de "pensamentos" usando um backend leve (JSON-server) para armazenamento local.
 
-## Development server
+**Visão Geral**
+- **Descrição:**: Aplicação SPA em Angular para criar, editar, listar e excluir pensamentos (anotações curtas).
+- **Objetivo:**: Exemplo didático de arquitetura frontend + backend mock (JSON) com foco em boas práticas de organização e fácil execução local.
 
-To start a local development server, run:
+**Funcionalidades**
+- **Listar:**: Exibe pensamentos salvos.
+- **Criar/Editar/Excluir:**: Operações CRUD básicas.
+- **Frontend:**: Implementado em Angular (pasta `src/`).
+- **Backend:**: API simulada com `json-server` usando `backend/db.json`.
 
-```bash
-ng serve
+**Arquitetura**
+- **Visão de alto nível:**: Browser (SPA Angular) ⇄ API REST (json-server) ⇄ `db.json` (persistência simples). Assets estáticos servidos pelo frontend.
+
+```mermaid
+flowchart LR
+  U[Usuário] --> A[Angular SPA]
+  A --> B[(json-server)]
+  B --> D[(db.json)]
+  A --> S[(/public or src/assets)]
+  NG[ng serve] --> A
+  JS[json-server] --> B
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Observação: se o preview automático do Mermaid não aparecer na sua IDE, visualize neste arquivo no GitHub ou use uma extensão de preview Mermaid no VS Code (ex.: "Markdown Preview Mermaid Support").
 
-## Code scaffolding
+**Requisitos**
+- **Node.js:**: versão LTS (recomendado).
+- **npm / pnpm / yarn:**: gerenciador de pacotes.
+- **Angular CLI (opcional):**: para executar `ng serve` localmente.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+**Instalação & Execução (desenvolvimento)**
+- **Frontend:**
+  - Instale dependências: `npm install` (executar na raiz do projeto).
+  - Inicie o frontend: `ng serve` ou `npm run start`.
+  - Abra: `http://localhost:4200/`.
+- **Backend (API mock):**
+  - Entre na pasta do backend: `cd backend`.
+  - Instale dependências: `npm install`.
+  - Inicie o json-server: `npm run start` (ou `npx json-server --watch db.json --port 3000`).
+  - A API ficará disponível em: `http://localhost:3000/` (verifique `backend/package.json` para porta/rota exata).
 
-```bash
-ng generate component component-name
-```
+**Testes**
+- **Frontend:**: Execute `ng test` ou `npm run test` para rodar os testes unitários (Karma/Jasmine).
+- **Backend:**: Não há testes automatizados por padrão (json-server).
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+**Build & Deploy**
+- **Build de produção:**: `ng build --configuration production`.
+- **Artefatos:**: Os arquivos compilados ficam em `dist/`.
+- **Hospedagem:**: Pode ser hospedado em qualquer servidor estático (Netlify, Vercel, GitHub Pages) com o backend apontando para uma API real ou um mock persistente.
 
-```bash
-ng generate --help
-```
+**Contribuição**
+- **Como contribuir:**: Abra uma issue para discutir mudanças e envie PRs com mudanças claras e atômicas.
+- **Padrões:**: Mantenha código limpo, commits pequenos e testes quando aplicável.
 
-## Building
+**Visualizar o diagrama Mermaid localmente**
+- **VS Code:**: Instale uma extensão de preview (ex.: "Markdown Preview Mermaid Support" ou "Mermaid Markdown Preview").
+- **Linha de comando:**: Instale `mmdc` (Mermaid CLI) via `npm i -g @mermaid-js/mermaid-cli` para gerar imagens a partir do código Mermaid.
 
-To build the project run:
+**Contatos & Licença**
+- **Autor:**: `darpbr` (repositório local).
+- **Licença:**: Verifique a licença do repositório (adicionar `LICENSE` se necessário).
 
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
