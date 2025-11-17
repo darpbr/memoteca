@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-rodape',
   standalone: false,
   templateUrl: './rodape.html',
-  styleUrl: './rodape.css',
+  styleUrls: ['./rodape.css'],
 })
 export class Rodape {
 

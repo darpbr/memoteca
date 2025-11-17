@@ -4,11 +4,14 @@
     <button routerLink="/criarPensamento" class="botao">Adicionar pensamento</button>
   </header>
   <div class="mural">
-    @for (pensamento of listaPensamentos; track pensamento.id) {
-      <app-pensamento [pensamento]="pensamento"></app-pensamento>
-    } @empty {
-      <p>Nenhum pensamento encontrado na lista.</p>
-    }
+    <ng-container *ngIf="listaPensamentos?.length; else semPensamentos">
+      <app-pensamento *ngFor="let pensamento of listaPensamentos" [pensamento]="pensamento"></app-pensamento>
+    </ng-container>
+    <ng-template #semPensamentos>
+      <div class="ff-inter sem-pensamentos">
+        <p>Você ainda não adicionou nenhum pensamento.</p>
+      </div>
+    </ng-template>
   </div>
 </section>
 <ng-template #semPensamentos>

@@ -1,15 +1,33 @@
-import { Component } from '@angular/core';
-import { Pensamento } from '../pensamento/pensamento';
-import { PensamentoModel } from '../pensamento-model';
+import { Component, OnInit } from '@angular/core';
+import { PensamentoService } from '../pensamento';
+import { Pensamento } from '../pensamento-model';
 
 @Component({
   selector: 'app-listar-pensamento',
   standalone: false,
   templateUrl: './listar-pensamento.html',
-  styleUrl: './listar-pensamento.css',
+  styleUrls: ['./listar-pensamento.css'],
 })
-export class ListarPensamento {
+export class ListarPensamento implements OnInit {
 
-  listaPensamentos: PensamentoModel[] = [] as any [];
+  listaPensamentos: Pensamento[] = [];
+
+  constructor(private service: PensamentoService) { }
+
+  ngOnInit(): void {
+    this.carregarPensamentos();
+  }
+
+  private carregarPensamentos(): void {
+    this.service.listar().subscribe({
+      next: (listaPensamentos) => {
+        this.listaPensamentos = listaPensamentos;
+        console.log('Pensamentos carregados:', this.listaPensamentos);
+      },
+      error: (erro) => {
+        console.error('Erro ao carregar pensamentos:', erro);
+      }
+    });
+  }
 
 }
